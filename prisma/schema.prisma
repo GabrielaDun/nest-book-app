@@ -26,7 +26,7 @@ model Book {
   price Int
 
   createdAt DateTime @default (now())
-  update DateTime @updatedAt
+  updatedAt DateTime @updatedAt
 
   author Author? @relation(fields: [authorId], references: [id], onDelete: SetNull)
   authorId String?
