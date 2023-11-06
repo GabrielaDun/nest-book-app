@@ -7,11 +7,13 @@ import {
 import * as cors from 'cors';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { AuthorsModule } from './authors/authors.module';
+import { PrismaService } from './shared/services/prisma.service';
 
 @Module({
-  imports: [],
+  imports: [AuthorsModule],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, PrismaService],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer): void {
