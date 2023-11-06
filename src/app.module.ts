@@ -12,11 +12,13 @@ import { PrismaService } from './shared/services/prisma.service';
 import { BooksController } from './books/books.controller';
 import { BooksService } from './books/books.service';
 import { BooksModule } from './books/books.module';
+import { UsersModule } from './users/users.module';
+import { UsersController } from './users/users.controller';
 
 @Module({
-  imports: [AuthorsModule, BooksModule],
-  controllers: [AppController, BooksController],
-  providers: [AppService, PrismaService, BooksService],
+  imports: [AuthorsModule, BooksModule, UsersModule],
+  controllers: [AppController, BooksController, UsersController],
+  providers: [AppService, PrismaService, BooksService, UsersModule],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer): void {
