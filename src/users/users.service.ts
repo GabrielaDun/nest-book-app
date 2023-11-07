@@ -1,6 +1,7 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
 import { PrismaService } from 'src/shared/services/prisma.service';
 import { User } from '@prisma/client';
+import { UpdateUserDTO } from './dtos/update-users.dto';
 
 @Injectable()
 export class UsersService {
@@ -33,5 +34,29 @@ export class UsersService {
         throw new BadRequestException('Email already exists');
       }
     }
+  }
+  public delete(id: User['id']): Promise<User> {
+    return this.prismaService.user.delete({
+      where: { id },
+    });
+  }
+
+  public async edit(
+    userId: string,
+    userData: UpdateUserDTO,
+    password?: string,
+  ): Promise<User> {
+    const updateData: any = { ...userData };
+    if (password) {
+      updateData.password = {
+        update: {
+          hashedPassword: password,
+        },
+      };
+    }
+    return await this.prismaService.user.update({
+      where: { id: userId },
+      data: updateData,
+    });
   }
 }
