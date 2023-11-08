@@ -17,6 +17,7 @@ export class AuthService {
       (await bcrypt.compare(password, user.password.hashedPassword))
     ) {
       const { password, ...userWithoutPassword } = user;
+      console.log(password);
       return userWithoutPassword;
     }
     return null;

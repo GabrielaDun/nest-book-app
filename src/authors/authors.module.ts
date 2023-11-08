@@ -4,8 +4,8 @@ import { AuthorsService } from './authors.service';
 import { PrismaModule } from 'src/prisma/prisma.module';
 
 @Module({
+  imports: [PrismaModule],
   controllers: [AuthorsController],
   providers: [AuthorsService],
-  imports: [PrismaModule],
 })
 export class AuthorsModule {}
