@@ -6,7 +6,7 @@ import { RegisterDTO } from './dtos/RegisterDTO.dto';
 export class AuthController {
   constructor(private authService: AuthService) {}
   @Post('/register')
-  create(@Body() userData: RegisterDTO) {
-    return this.authService.register(userData);
+  create(@Body() regisData: RegisterDTO) {
+    return this.authService.register(regisData);
   }
 }
