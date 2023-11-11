@@ -1,5 +1,5 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
-import { PrismaService } from 'src/shared/services/prisma.service';
+import { PrismaService } from 'src/prisma/prisma.service';
 import { Password, User } from '@prisma/client';
 import { UpdateUserDTO } from './dtos/update-users.dto';
 
@@ -19,6 +19,7 @@ export class UsersService {
   ): Promise<(User & { password?: Password }) | null> {
     return this.prismaService.user.findUnique({
       where: { email },
+      include: { password: true },
     });
   }
   public async create(email: string, hashedPassword: string): Promise<User> {
