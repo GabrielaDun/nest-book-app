@@ -16,11 +16,11 @@ export class AuthService {
   }
   public async validateUser(email: string, password: string) {
     const user = await this.usersService.getByEmail(email);
-    //const passportRecord = await this.usersService.get
-    if (
-      user &&
-      (await bcrypt.compare(password, user.password.hashedPassword))
-    ) {
+    const checkPassword = await bcrypt.compare(
+      password,
+      user.password.hashedPassword,
+    );
+    if (user && checkPassword) {
       const { password, ...userWithoutPassword } = user;
       console.log(password);
       return userWithoutPassword;
