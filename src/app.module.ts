@@ -16,9 +16,18 @@ import { UsersController } from './users/users.controller';
 import { AuthModule } from './auth/auth.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { PrismaService } from './prisma/prisma.service';
+import { ConfigModule } from '@nestjs/config';
+import configuration from './config/configuration';
 
 @Module({
-  imports: [PrismaModule, AuthorsModule, BooksModule, UsersModule, AuthModule],
+  imports: [
+    PrismaModule,
+    AuthorsModule,
+    BooksModule,
+    UsersModule,
+    AuthModule,
+    ConfigModule.forRoot({ load: [configuration], isGlobal: true }),
+  ],
   controllers: [AppController, BooksController, UsersController],
   providers: [AppService, PrismaService, BooksService, UsersModule],
 })
